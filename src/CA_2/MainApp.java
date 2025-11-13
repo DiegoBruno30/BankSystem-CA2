@@ -40,9 +40,9 @@ public class MainApp {
                     break;
                     // will implement later
                 case 2:
-                    System.out.println("SEARCH selected");
-                    // will implement later
-                    break;
+                   System.out.println("SEARCH selected");
+                   searchEmployee();
+                   break;
                 case 3:
                     System.out.println("ADD RECORD selected");
                     // will implement later
@@ -112,12 +112,12 @@ public class MainApp {
         System.out.println("\nFirst 20 employees (sorted alphabetically):");
         int displayCount = Math.min(20, sortedList.size());
         for (int i = 0; i < displayCount; i++) {
-            System.out.println((i + 1) + ". " + sortedList.get(i).getName());  // ERRO AQUI - falta importar método
+            System.out.println((i + 1) + ". " + sortedList.get(i).getName());  
         }
         
         System.out.println("\nTotal employees sorted: " + sortedList.size());
-        System.out.println("=======================================")
-    }  // ERRO - falta ponto e vírgula
+        System.out.println("=======================================");
+    } 
     
     // Recursive Merge Sort implementation
     private static void mergeSort(ArrayList<Employee> list, int left, int right) {
@@ -161,7 +161,7 @@ public class MainApp {
                 list.set(k, leftArray.get(i));
                 i++;
             } else {
-                list.set(k, rightArray.get(j))  // ERRO - falta ponto e vírgula
+                list.set(k, rightArray.get(j));  
                 j++;
             }
             k++;
@@ -180,4 +180,58 @@ public class MainApp {
             k++;
         }
     }
+    // Function to search employee using Binary Search
+    private static void searchEmployee() {
+        System.out.println("\n========== SEARCH EMPLOYEE ==========");
+        
+        if (employeeList.isEmpty()) {
+            System.out.println("No employees available to search!");
+            return;
+        }
+        
+        System.out.print("Enter employee name to search: ");
+        String searchName = scanner.nextLine().trim();
+        
+        // First, sort the list for binary search
+        ArrayList<Employee> sortedList = new ArrayList<>(employeeList);
+        mergeSort(sortedList, 0, sortedList.size() - 1);
+        
+        // Perform binary search
+        int index = binarySearch(sortedList, searchName);
+        
+        if (index != -1) {
+            Employee found = sortedList.get(index);
+            System.out.println("\n✓ Employee Found!");
+            System.out.println("Name: " + found.getName());
+            System.out.println("Manager Type: " + found.getManagerType());
+            System.out.println("Department: " + found.getDepartment())  
+            System.out.println("Employee ID: " + found.getId());
+        } else {
+            System.out.println("\n✗ Employee not found!");
+        }
+        
+        System.out.println("====================================");
+    }
+    
+    // Binary Search implementation
+    private static int binarySearch(ArrayList<Employee> list, String name) {
+        int left = 0;
+        int right = list.size() - 1;
+        
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            int comparison = list.get(mid).getName().compareToIgnoreCase(name);
+            
+            if (comparison == 0) {
+                return mid; // Found
+            } else if (comparison < 0) {
+                left = mid + 1; // Search right half
+            } else {
+                right = mid - 1 //
+            }
+        }
+        
+        return -1; // Not found
+    }
+
 }
