@@ -204,7 +204,7 @@ public class MainApp {
             System.out.println("\n✓ Employee Found!");
             System.out.println("Name: " + found.getName());
             System.out.println("Manager Type: " + found.getManagerType());
-            System.out.println("Department: " + found.getDepartment())  
+            System.out.println("Department: " + found.getDepartment());  
             System.out.println("Employee ID: " + found.getId());
         } else {
             System.out.println("\n✗ Employee not found!");
@@ -227,7 +227,7 @@ public class MainApp {
             } else if (comparison < 0) {
                 left = mid + 1; // Search right half
             } else {
-                right = mid - 1 //
+                right = mid - 1; //
             }
         }
         
