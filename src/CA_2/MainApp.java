@@ -233,5 +233,76 @@ public class MainApp {
         
         return -1; // Not found
     }
+// Function to add new employee with validation
+    private static void addNewEmployee() {
+        System.out.println("\n========== ADD NEW EMPLOYEE ==========");
+        
+        // Get employee name
+        System.out.print("Enter employee name: ");
+        String name = scanner.nextLine().trim();
+        
+        // Validate name is not empty
+        if (nameisEmpty()) {
+            System.out.println("Error: Name cannot be empty!")
+            return;  
+        }
+        
+        // Display and select manager type
+        System.out.println("\nAvailable Manager Types:");
+        System.out.println("1. Branch Manager");
+        System.out.println("2. Department Manager");
+        System.out.println("3. Regional Manager");
+        System.out.print("Select manager type (1-3): ");
+        
+        int managerChoice = scanner.nextInt();
+        scanner.nextLine(); // clear buffer
+        
+        String managerType;
+        if (managerChoice == 1) {
+            managerType = "Branch Manager";
+        } else if (managerChoice == 2) {
+            managerType = "Department Manager";
+        } else if (managerChoice == 3) {
+            managerType  "Regional Manager";
+        } else {
+            System.out.println("Error: Invalid manager type!");
+            return;
+        }
+        
+        // Display and select department
+        System.out.println("\nAvailable Departments:");
+        System.out.println("1. Retail Banking");
+        System.out.println("2. Loans");
+        System.out.println("3. Investment");
+        System.out.println("4. IT");
+        System.out.print("Select department (1-4): ");
+        
+        int deptChoice = scanner.nextInt();
+        scanner.nextLine(); // clear buffer
+        
+        String department;
+        if (deptChoice == 1) {
+            department = "Retail Banking";
+        } else if (deptChoice == 2) {
+            department = "Loans"  
+        } else if (deptChoice == 3) {
+            department = "Investment";
+        } else if (deptChoice == 4) {
+            department = "IT";
+        } else {
+            System.out.println("Error: Invalid department!");
+            return;
+        }
+        
+        // Create new employee
+        Employee newEmployee = new Employee(employeeIdCounter++, name, managerType, department);
+        employeeList.add(newEmployee);
+        
+        // Confirmation message
+        System.out.println("\n✓ Employee added successfully!");
+        System.out.println(newEmployee);
+        
+        System.out.println("======================================");
+    }
 
 }
