@@ -6,6 +6,7 @@ package CA_2;
 import java.util.Scanner;
 import java.io.*;
 import java.util.*;
+import java.util.InputMismatchException;
 /**
  *
  * @author diego
@@ -27,42 +28,43 @@ public class MainApp {
         // Menu loop
         boolean running = true;
         
-        while (running) {
-            MenuOption.displayMenu();
-            
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // clear buffer
-            
-            switch (choice) {
-                case 1:
-                   System.out.println("SORT selected");
-                   sortEmployees();
-                    break;
-                    // will implement later
-                case 2:
-                   System.out.println("SEARCH selected");
-                   searchEmployee();
-                   break;
-                case 3:
-                    System.out.println("ADD RECORD selected");
-                    // will implement later
-                    break;
-                case 4:
-                    System.out.println("BINARY TREE selected");
-                    // will implement later
-                    break;
-                case 5:
-                    System.out.println("Goodbye!");
-                    running = false;
-                    break;
-                default:
-                    System.out.println("Invalid option!");
-            }
-        }
-        
-        scanner.close();
-    }
+       while (running) {
+    MenuOption.displayMenu();
     
+    try {
+        int choice = scanner.nextInt();
+        scanner.nextLine(); // clear buffer
+        
+        switch (choice) {
+            case 1:
+               System.out.println("SORT selected");
+               sortEmployees();
+                break;
+            case 2:
+               System.out.println("SEARCH selected");
+               searchEmployee();
+               break;
+            case 3:
+                System.out.println("ADD RECORD selected");
+                addNewEmployee();
+                break;
+            case 4:
+                System.out.println("BINARY TREE selected");
+                // will implement later
+                break;
+            case 5:
+                System.out.println("Goodbye!");
+                running = false;
+                break;
+            default:
+                System.out.println("Invalid option!");
+        }
+    } catch (InputMismatchException e) {
+        System.out.println("Error: Please enter a valid number!");
+        scanner.nextLine(); // clear the bad input
+    }
+   } 
+  }
     // Function to read file
     private static void loadEmployeesFromFile() {
         System.out.print("Please enter the filename to read: ");
@@ -242,8 +244,8 @@ public class MainApp {
         String name = scanner.nextLine().trim();
         
         // Validate name is not empty
-        if (nameisEmpty()) {
-            System.out.println("Error: Name cannot be empty!")
+        if (name.isEmpty()) {
+            System.out.println("Error: Name cannot be empty!");
             return;  
         }
         
@@ -263,7 +265,7 @@ public class MainApp {
         } else if (managerChoice == 2) {
             managerType = "Department Manager";
         } else if (managerChoice == 3) {
-            managerType  "Regional Manager";
+            managerType = "Regional Manager";
         } else {
             System.out.println("Error: Invalid manager type!");
             return;
@@ -284,7 +286,7 @@ public class MainApp {
         if (deptChoice == 1) {
             department = "Retail Banking";
         } else if (deptChoice == 2) {
-            department = "Loans"  
+            department = "Loans";  
         } else if (deptChoice == 3) {
             department = "Investment";
         } else if (deptChoice == 4) {
